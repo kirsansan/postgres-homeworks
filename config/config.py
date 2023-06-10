@@ -6,7 +6,7 @@ load_dotenv()
 
 DB_PASSWORD = os.getenv('POSTGRES_PASSWORD')
 
-
+DB_NAME = 'north'
 
 
 PATH_CUSTOMERS = './north_data/customers_data.csv'

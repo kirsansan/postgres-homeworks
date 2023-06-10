@@ -25,3 +25,20 @@ class Reader:
                     raise InstantiateCSVError(f"{path} file is corrupted")
         except FileNotFoundError:
             raise FileNotFoundError(f"file {path} does not exist or bad directory")
+
+    @staticmethod
+    def get_from_csv(path: str) -> list[tuple]:
+        """
+        we are going to get all-items from csv file and return as list of tuples
+        ::return:: list of tuples in order as wrote in file """
+        data_list = []
+        try:
+            with open(path, newline='') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    tmp_row = []
+                    [tmp_row.append(item) for item in row.values()]
+                    data_list.append(tuple(tmp_row))
+        except FileNotFoundError:
+            raise FileNotFoundError(f"file {path} does not exist or bad directory")
+        return data_list

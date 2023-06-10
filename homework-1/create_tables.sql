@@ -17,8 +17,8 @@ CREATE TABLE employees
 
 CREATE TABLE orders
 (	order_id int PRIMARY KEY,
- 	customer_id char (6) UNIQUE REFERENCES customers (customer_id),
- 	employee_id int UNIQUE REFERENCES employees (employee_id),
+ 	customer_id char (6) REFERENCES customers (customer_id),
+ 	employee_id int REFERENCES employees (employee_id),
  	order_date char (10),
  	shio_city char (30)
 );
