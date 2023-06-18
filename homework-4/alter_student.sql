@@ -34,9 +34,10 @@ INSERT INTO student (first_name, last_name, birth_date, phone ) VALUES ('Julius'
 INSERT INTO student (first_name, last_name, birth_date, phone ) VALUES ('Octavianus', 'Augustus', '0014-08-14', 'call me by the Bell two times');
 
 
---INSERT INTO student (first_name, last_name, birth_date, phone ) VALUES ('Mark', 'Avrelii', '121-04-26', 'nothing');
---INSERT INTO student (first_name, last_name, birth_date, phone ) VALUES ('Julius', 'Caesar', '0100-07-12 BC', 'call me by the Bell'),
---																	   ('Octavianus', 'Augustus', '0014-08-14', 'call me by the Bell two times');
+--INSERT INTO student (first_name, last_name, birth_date, phone )
+--VALUES VALUES ('Mark', 'Avrelii', '121-04-26', 'nothing'),
+--               ('Julius', 'Caesar', '0100-07-12 BC', 'call me by the Bell'),
+--               ('Octavianus', 'Augustus', '0014-08-14', 'call me by the Bell two times');
 
 
 -- 7. Удалить все данные из таблицы со сбросом идентификатор в исходное состояние
