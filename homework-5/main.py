@@ -2,7 +2,7 @@ import json
 
 import psycopg2
 
-from config import config
+from not_my_config import config
 
 
 def main():

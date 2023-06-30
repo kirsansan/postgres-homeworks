@@ -8,7 +8,8 @@ class DB_Model:
         self.db_name = db_name
 
     def print_cursor(self):
-        """ test for create cursor for database and print it"""
+        """ test for create cursor for database and print it
+        this method needs me for a tests"""
         db_connector = psycopg2.connect(
             host='localhost',
             port='5432',
@@ -29,8 +30,8 @@ class DB_Model:
         if not data_as_tuples:
             return None
 
-        # I belief all data in data_as_tuples have the same structure
-        # so i can see it in the first one
+        # I believe all data in data_as_tuples have the same structure.
+        # so I can see it in the first one
         values_string = self.value_creator(len(data_as_tuples[0]))
 
         db_connector = psycopg2.connect(
@@ -47,6 +48,44 @@ class DB_Model:
                         cursor.execute(f"INSERT INTO {table_name} {values_string}", row)
         finally:
             db_connector.close()
+
+    def execute_sql_script(self, command, **params):
+        """ create the database
+        params is dict with parameters for postgreSQL
+        """
+
+        db_connector = psycopg2.connect(
+            host=params['host'],
+            port=params['port'],
+            database=params['database'],
+            user=params['user'],
+            password=DB_PASSWORD
+        )
+        try:
+            with db_connector:
+                with db_connector.cursor() as cursor:
+                    cursor.execute(command)
+        finally:
+            db_connector.close()
+
+    def database_creator(self, command, **params):
+        """ create the database
+        params is dict with parameters for postgreSQL
+        """
+
+        db_connector = psycopg2.connect(
+            host=params['host'],
+            port=params['port'],
+            database=params['database'],
+            user=params['user'],
+            password=DB_PASSWORD
+        )
+        db_connector.autocommit = True
+        cursor = db_connector.cursor()
+        cursor.execute(command)
+        cursor.close()
+        db_connector.close()
+
 
     @staticmethod
     def value_creator(number: int):
