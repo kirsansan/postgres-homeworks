@@ -6,7 +6,7 @@ CREATE TABLE customers
   contact_name char (50)
 );
 
-CREATE TABLE employees
+CREATE TABLE employees --comment for test
 ( employee_id int PRIMARY KEY,
   first_name char (20),
   last_name char (20),
@@ -20,5 +20,5 @@ CREATE TABLE orders
  	customer_id char (6) REFERENCES customers (customer_id),
  	employee_id int REFERENCES employees (employee_id),
  	order_date char (10),
- 	shio_city char (30)
+ 	ship_city char (30)
 );
