@@ -79,6 +79,7 @@ def main():
     # read from json
     json_data_suppliers = Reader().get_from_json('../homework-5/suppliers.json')
 
+    # block for doing non-universal commands with TABLES
     try:
         with db.connector.cursor() as cur:
 
