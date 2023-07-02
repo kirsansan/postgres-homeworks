@@ -9,7 +9,7 @@ class ReaderSQLCommandFile:
         ::return:: multistring with command """
         tmp_line = ''
         try:
-            with open(path, newline='') as commandfile:
+            with open(path, encoding='utf-8', newline='\n') as commandfile:
                 for line in commandfile:
                     first_part = line.strip().split('--')[0]
                     if first_part != "":
@@ -22,4 +22,4 @@ class ReaderSQLCommandFile:
 
 if __name__ == '__main__':
     reader = ReaderSQLCommandFile()
-    print(reader.get_from_sql('../homework-1/create_tables.sql'))
+    print(reader.get_from_sql('../homework-5/fill_db.sql'))

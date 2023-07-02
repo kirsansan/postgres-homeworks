@@ -24,3 +24,15 @@ FIELDS_ORDERS_FILE = ("order_id","customer_id","employee_id","order_date","ship_
 PATH_SQL_CREATOR = '../homework-5/create_db.sql'
 PATH_SQL_FILLER = '../homework-5/fill_db.sql'
 PATH_DB_INI = '../config/database.ini'
+
+CREATE_TABLE_SUPPLIERS = """
+                    CREATE TABLE suppliers (
+                    supplier_id SERIAL PRIMARY KEY,
+                    company_name character varying(40) NOT NULL,
+                    contact character varying(50),
+                    address character varying(80),
+                    phone character varying(24),
+                    fax character varying(24),
+                    homepage text
+                    );
+                    """

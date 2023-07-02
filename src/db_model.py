@@ -6,23 +6,23 @@ class DB_Model:
 
     def __init__(self, db_name):
         self.db_name = db_name
+        self.connector = None
+        self.cursor = None
 
-    def print_cursor(self):
-        """ test for create cursor for database and print it
-        this method needs me for a tests"""
-        db_connector = psycopg2.connect(
-            host='localhost',
-            port='5432',
-            database=self.db_name,
-            user='postgres',
-            password=DB_PASSWORD
-        )
-        try:
-            with db_connector:
-                with db_connector.cursor() as cursor:
-                    print(cursor)
-        finally:
-            db_connector.close()
+    def open_connector(self, **params):
+        if not self.connector:
+            self.connector = psycopg2.connect(
+                host=params['host'],
+                port=params['port'],
+                database=params['database'],
+                user=params['user'],
+                password=DB_PASSWORD
+            )
+
+    def close_connector(self):
+        #self.cursor.close()
+        self.connector.close()
+
 
     def universe_db_saver(self, table_name, data_as_tuples):
         """ fill the database with the given data_as_tuples
@@ -53,38 +53,31 @@ class DB_Model:
         """ create the database
         params is dict with parameters for postgreSQL
         """
-
-        db_connector = psycopg2.connect(
-            host=params['host'],
-            port=params['port'],
-            database=params['database'],
-            user=params['user'],
-            password=DB_PASSWORD
-        )
+        self.open_connector(**params)
         try:
-            with db_connector:
-                with db_connector.cursor() as cursor:
+            with self.connector:
+                with self.connector.cursor() as cursor:
                     cursor.execute(command)
+        except:
+            pass
         finally:
-            db_connector.close()
+            pass
+        #     self.connector.close()
 
     def database_creator(self, command, **params):
         """ create the database
         params is dict with parameters for postgreSQL
         """
-
-        db_connector = psycopg2.connect(
-            host=params['host'],
-            port=params['port'],
-            database=params['database'],
-            user=params['user'],
-            password=DB_PASSWORD
-        )
-        db_connector.autocommit = True
-        cursor = db_connector.cursor()
-        cursor.execute(command)
-        cursor.close()
-        db_connector.close()
+        try:
+            self.open_connector(**params)
+            self.connector.autocommit = True
+            cursor = self.connector.cursor()
+            cursor.execute(command)
+            cursor.close()
+            self.connector.close()
+        except:
+            print("Failed to create database")
+            quit(401)
 
 
     @staticmethod

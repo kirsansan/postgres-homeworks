@@ -1,4 +1,5 @@
 import csv
+import json
 
 class InstantiateCSVError(Exception):
     pass
@@ -42,3 +43,21 @@ class Reader:
         except FileNotFoundError:
             raise FileNotFoundError(f"file {path} does not exist or bad directory")
         return data_list
+
+    @staticmethod
+    def get_from_json(path: str) -> list[dict]:
+        """
+        we are going to get all data  from JSON file
+        ::return:: dict with data """
+        try:
+            with open(path, 'r', encoding='utf-8') as jsonfile:
+                data = json.load(jsonfile)
+                #data = data.encode('utf-8')
+        except FileNotFoundError:
+            raise FileNotFoundError(f"file {path} does not exist or bad directory")
+        return data
+
+if __name__ == '__main__':
+    r = Reader()
+    r_data = r.get_from_json('../homework-5/suppliers.json')
+    print(r_data)
